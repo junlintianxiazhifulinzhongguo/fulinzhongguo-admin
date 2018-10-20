@@ -65,15 +65,18 @@ const permission = {
       return new Promise(resolve => {
         const { roles, routerMap } = data
         let accessedRouters
-        routerMap.forEach((item, index) => {
-          if (item.component && item.component === 'Layout') {
-            item.component = Layout
-          }
-          if (item.children) {
-            formatAsyncRouterMap(item.children)
-          }
-          asyncRouterMap.push(item)
-        })
+        console.log(routerMap)
+        if (routerMap !== undefined) {
+          routerMap.forEach((item, index) => {
+            if (item.component && item.component === 'Layout') {
+              item.component = Layout
+            }
+            if (item.children) {
+              formatAsyncRouterMap(item.children)
+            }
+            asyncRouterMap.push(item)
+          })
+        }
         if (roles.includes('admin')) {
           accessedRouters = asyncRouterMap
         } else {
